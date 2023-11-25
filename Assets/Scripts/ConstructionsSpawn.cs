@@ -13,6 +13,7 @@ public class ConstructionsSpawn : MonoBehaviour
     public bool[][] occupied;
     public int minTimeInterval, maxTimeInterval;
     public Grid grid;
+    bool filled = false;
 
     void Start()
     {
@@ -22,16 +23,21 @@ public class ConstructionsSpawn : MonoBehaviour
             occupied[i] = new bool[maxLineX[0]];
         }
 
-        spawnCasaTimer();
+
+        StartCoroutine(spawnCasaTimer());
     }
 
 
     void spawnarCasa(int[] coordenadas)
 {
-        // Logica para criar novo asset de casa no mapa
-        grid.spawnHouseInGrid(coordenadas);
-        // Logica para adicionar no sistema
-        occupied[coordenadas[1]][coordenadas[0]] = true;
+        if (coordenadas[0] > -1)
+        {
+            // Logica para criar novo asset de casa no mapa
+            grid.spawnHouseInGrid(coordenadas);
+            // Logica para adicionar no sistema
+            occupied[coordenadas[1]][coordenadas[0]] = true;
+        }
+        
 }
 
 int[] casasPorY()
@@ -73,11 +79,11 @@ int[] calcularCoordenadas(int[] maxX, int[] cpy)
         else
         {
             int primeiraLinha = 0;
-            int ultimaLinha = -1;
+            int ultimaLinha = 1;
             for (int i = 0; i < maxY; i++)
             {
                 // Maximo de casas nessa linha
-                if (cpy[i] > maxX[i])
+                if (cpy[i] >= maxX[i])
                 { 
                         primeiraLinha = i + 1;
                 }
@@ -129,26 +135,40 @@ int[] calcularCoordenadas(int[] maxX, int[] cpy)
 
             }
         }
-        toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]+1);
-
-        while (isCasaOcupada(toReturn)) 
+        if (toReturn[1] >= maxGridY) 
         {
-                toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]+1);
+            toReturn[0] = -1;
+            toReturn[1] = -1;
+            filled = true;
         }
+        else { 
+            toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]);
 
+            while (isCasaOcupada(toReturn)) 
+            {
+                    if (cpy[toReturn[1]] >= maxX[toReturn[1]])
+                    {
+                        break;
+                    }
+                    toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]);
+            }
+        }
         return toReturn;
 }
 
     // Update is called once per frame
 
-    async void spawnCasaTimer()
+    IEnumerator spawnCasaTimer()
     {
-        await Task.Delay(UnityEngine.Random.Range(minTimeInterval*1000, maxTimeInterval*1000));
-        int[] coordenadas = calcularCoordenadas(maxLineX, casasPorY());
+        while (!filled)
+        {
+            int[] coordenadas = calcularCoordenadas(maxLineX, casasPorY());
+            spawnarCasa(coordenadas);
+            yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeInterval, maxTimeInterval));
+        }
 
-        spawnarCasa(coordenadas);
-        spawnCasaTimer();
     }
+
     void Update()
     {
 
