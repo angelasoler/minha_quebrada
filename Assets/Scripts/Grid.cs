@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-
-    public Object house;
     public Object grid;
     public float multiplier;
+
+    [SerializeField] GameObject[] objects;
+
     public void spawnHouseInGrid(int[] coordinate)
     {
-        
+        int range = Random.Range(0, objects.Length - 1);
+
         float convertedX = coordinate[0] * multiplier;
         float convertedY = coordinate[1] * multiplier;
 
-        Instantiate(house, new Vector3(convertedX,convertedY), Quaternion.identity);
+        Instantiate(objects[range], new Vector3(convertedX,convertedY), Quaternion.identity);
     }
 
     // Start is called before the first frame update
