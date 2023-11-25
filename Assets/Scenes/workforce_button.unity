@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35.6, y: 5.8}
+  m_AnchoredPosition: {x: 122.7, y: 12.2}
   m_SizeDelta: {x: 61.2527, y: 31.8622}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &563266709
@@ -323,7 +323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f91de3fdbaefe4d4584dce2f2dad9bed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7706342429813532783, guid: fbfda5f4d35ba034a8583e6f827440d8, type: 3}
+  prefab: {fileID: 5944359332323342565, guid: 922d7916e9152fa4ebbebfed8d6c0b5a, type: 3}
+  interval: 2
 --- !u!4 &563266711
 Transform:
   m_ObjectHideFlags: 0
@@ -469,7 +470,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 26.589035
+  orthographic size: 116.75871
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

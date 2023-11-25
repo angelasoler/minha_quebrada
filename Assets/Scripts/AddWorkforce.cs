@@ -8,14 +8,14 @@ public class AddWorkforce : MonoBehaviour
 
 {
 
-
-
     public TMP_Text text;
     private int count = 0;
 
     public SpriteRenderer button;
 
     public AudioSource audioSource;
+
+    private Vector3 position;
 
     private void Start()
     {
@@ -28,6 +28,7 @@ public class AddWorkforce : MonoBehaviour
     {
         if (button != null) {
             text.SetText(count.ToString());
+            position = transform.position + new Vector3(100f, 100f, 0f);
         }
         
     }
