@@ -12,6 +12,8 @@ public class AddWorkforce : MonoBehaviour
     private int count = 0;
 
     public SpriteRenderer button;
+
+    public AudioSource audioSource;
     
 
     // Update is called once per frame
@@ -26,7 +28,12 @@ public class AddWorkforce : MonoBehaviour
     private void OnMouseDown()
     {
         count += 1;
+        audioSource.Play();
         Destroy(button);
+        if (button == null )
+        {
+            Destroy(audioSource);
+        }
     }
 
 }
