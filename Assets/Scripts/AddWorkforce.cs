@@ -8,13 +8,20 @@ public class AddWorkforce : MonoBehaviour
 
 {
 
+
+
     public TMP_Text text;
     private int count = 0;
 
     public SpriteRenderer button;
 
     public AudioSource audioSource;
-    
+
+    private void Start()
+    {
+        text = GameObject.FindGameObjectWithTag("WorkforceText").GetComponent<TMP_Text>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -30,7 +37,8 @@ public class AddWorkforce : MonoBehaviour
         count += 1;
         audioSource.Play();
         Destroy(button);
-        if (button == null )
+
+        if (button == null)
         {
             Destroy(audioSource);
         }
