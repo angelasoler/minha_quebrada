@@ -51,33 +51,37 @@ public class ConstructionsSpawn : MonoBehaviour
             maxLineXHosp[i]--;
         }*/
 
-        int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
+        if (!filled) {
+            int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
 
-        if (coordenadas[0] > -1)
-        {
-            // Logica para criar novo asset de casa no mapa
-            grid.spawnHospitalInGrid(coordenadas);
-            // Toca musica ao spawnar
-            if (audioManager != null)
+            if (coordenadas[0] > -1)
             {
-                audioManager.playSound("const_hospital");
-            }
-            // Logica para adicionar no sistema
-            occupied[coordenadas[1]][coordenadas[0]] = true;
-            occupied[coordenadas[1]][coordenadas[0]+1] = true;
+                // Logica para criar novo asset de casa no mapa
+                grid.spawnHospitalInGrid(coordenadas);
+                // Toca musica ao spawnar
+                if (audioManager != null)
+                {
+                    audioManager.playSound("const_hospital");
+                }
+                // Logica para adicionar no sistema
+                occupied[coordenadas[1]][coordenadas[0]] = true;
+                occupied[coordenadas[1]][coordenadas[0]+1] = true;
 
-            constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
-            constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
-        }
-        else
-        {
-            Debug.Log("Coordenada -1");
+                constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
+                constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
+
+                totalConstructions += 2;
+            }
+            else
+            {
+                Debug.Log("Coordenada -1");
+            }
         }
     }
 
     void spawnarCasa(int[] coordenadas)
 {
-        if (coordenadas[0] > -1)
+        if (coordenadas[0] > -1 && !filled)
         {
             // Logica para criar novo asset de casa no mapa
             grid.spawnHouseInGrid(coordenadas);
@@ -89,6 +93,8 @@ public class ConstructionsSpawn : MonoBehaviour
             // Logica para adicionar no sistema
             occupied[coordenadas[1]][coordenadas[0]] = true;
             constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Casa;
+
+            totalConstructions += 1;
         }
         
 }
@@ -224,7 +230,10 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
 
     void Update()
     {
-
+        if (totalConstructions >= maxConstructions)
+        {
+            filled = true;
+        }
         
     }
 }
