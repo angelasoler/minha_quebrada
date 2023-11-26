@@ -12,10 +12,12 @@ public class MenuButtons : MonoBehaviour
 
     public SpriteRenderer button;
 
-    public AudioSource audioSource;
+    public AudioSource audioSourceBotao;
+    public AudioClip clip;
 
     private void Start()
     {
+        
     }
 
     // Update is called once per frame
@@ -34,13 +36,9 @@ public class MenuButtons : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        audioSource.Play();
+        audioSourceBotao.PlayOneShot(clip);
         Destroy(button);
 
-        if (button == null)
-        {
-            Destroy(audioSource);
-        }
     }
 
 }
