@@ -620,6 +620,7 @@ GameObject:
   - component: {fileID: 924211728}
   - component: {fileID: 924211727}
   - component: {fileID: 924211729}
+  - component: {fileID: 924211730}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -676,6 +677,18 @@ MonoBehaviour:
   current: 50
   slider: {fileID: 610212348}
   decrementBar: {fileID: 610212347}
+--- !u!114 &924211730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924211726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60fd20be6e0f14148b925d425a071e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1127940448
 GameObject:
   m_ObjectHideFlags: 0
