@@ -24,7 +24,7 @@ public class Grid : MonoBehaviour
 
     {
         //Pega um asset aleatorio de uma pool de assets
-        int range = UnityEngine.Random.Range(0, objects.Length - 1);
+        int range = UnityEngine.Random.Range(0, objects.Length);
 
         Instantiate(objects[range], ConvertCordToVector3(coordinate), Quaternion.identity);
     }
@@ -32,7 +32,7 @@ public class Grid : MonoBehaviour
     public void spawnHospitalInGrid(int[] coordinate)
     {
         Debug.Log("spawn");
-        int index = UnityEngine.Random.Range(0, hospitals.Length - 1);
+        int index = UnityEngine.Random.Range(0, hospitals.Length);
         Instantiate(hospitals[index], ConvertCordToVector3(coordinate), Quaternion.identity);
     }
 
