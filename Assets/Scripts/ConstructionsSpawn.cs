@@ -29,10 +29,15 @@ public class ConstructionsSpawn : MonoBehaviour
 
     private ResourceManager resourceManager;
 
+    private MainManager mainManager;
+
     public int price;
+
+    public int increaseAmount;
 
     void Start()
     {
+        mainManager = MainManager.Instance;
         audioManager = AudioManager.Instance;
         resourceManager = ResourceManager.Instance;
 
@@ -60,22 +65,25 @@ public class ConstructionsSpawn : MonoBehaviour
 
         if (coordenadas[0] > -1 && resourceManager.count >= 5)
         {
-           
-            resourceManager.RemoveCount(price);
-            
+
+                resourceManager.RemoveCount(price);
+                
+
             // Logica para criar novo asset de casa no mapa
             grid.spawnHospitalInGrid(coordenadas);
-            // Toca musica ao spawnar
-            if (audioManager != null)
-            {
-                audioManager.playSound("const_hospital");
-            }
-            // Logica para adicionar no sistema
-            occupied[coordenadas[1]][coordenadas[0]] = true;
-            occupied[coordenadas[1]][coordenadas[0]+1] = true;
+                // Toca musica ao spawnar
+                if (audioManager != null)
+                {
+                    audioManager.playSound("const_hospital");
+                }
+                // Logica para adicionar no sistema
+                occupied[coordenadas[1]][coordenadas[0]] = true;
+                occupied[coordenadas[1]][coordenadas[0] + 1] = true;
 
-            constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
-            constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
+                constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
+                constructionGrid[coordenadas[1]][coordenadas[0] + 1] = ConstructionType.Hospital;
+
+            
         }
         else
         {
@@ -232,7 +240,10 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.H)){
+            spawnarHospital();
+            mainManager.increaseLifeValue(increaseAmount);
+        }
         
     }
 }

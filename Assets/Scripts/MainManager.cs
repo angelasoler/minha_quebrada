@@ -20,6 +20,15 @@ public class MainManager : MonoBehaviour
 
     private bool[][] arrayCasasOcupadas;
 
+    public float decreaseAmount;
+
+    public static MainManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void setLifeValue(float value)
     {
         currentLifeValue = value;
@@ -74,12 +83,9 @@ public class MainManager : MonoBehaviour
                         {
                             if (spawn.constructionGrid[y][x] == ConstructionsSpawn.ConstructionType.Casa)
                             {
-                                decreaseLifeValue(0.5f);
+                                decreaseLifeValue(decreaseAmount);
                             }
-                            if (spawn.constructionGrid[y][x] == ConstructionsSpawn.ConstructionType.Hospital)
-                            {
-                                increaseLifeValue(1f);
-                            }
+                            
 
                         }
 
@@ -97,4 +103,7 @@ public class MainManager : MonoBehaviour
 
 
     }
+
+
+
 }
