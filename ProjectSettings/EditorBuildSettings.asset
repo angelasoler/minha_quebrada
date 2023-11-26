@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InitMenu.unity
     guid: 0f6c1f2b50f086841838b23c6f8abd6d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/spawn_house.unity
     guid: 44eb93c25081ba84fa8dfa74e35b6b65
+  - enabled: 1
+    path: Assets/Scenes/Teste.unity
+    guid: 5cf0727ff88d0de43ac530e97b44c1a5
   m_configObjects: {}
