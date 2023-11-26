@@ -12,24 +12,23 @@ public class AddWorkforce : MonoBehaviour
 
     public SpriteRenderer button;
 
-    public AudioSource audioSource;
-
     private ResourceManager manager;
 
     AudioManager audioManager;
+
+    public int delayToDespawn;
 
     private void Start()
     {
         manager = ResourceManager.Instance;
         audioManager = AudioManager.Instance;
+        StartCoroutine(despawnAutomatic(delayToDespawn));
     }
 
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator despawnAutomatic(int seconds)
     {
-        
-        
+        yield return new WaitForSeconds(seconds);
+        Destroy(gameObject);
     }
 
     private void OnMouseDown()

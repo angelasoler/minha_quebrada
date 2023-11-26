@@ -55,6 +55,7 @@ public class WorkforceSpawner : MonoBehaviour
                         cords[0] = x;
                         cords[1] = y+1;
                         Instantiate(prefab, grid.ConvertCordToVector3(cords), Quaternion.identity);
+                        AudioManager.Instance.playSound("bolha");
                         timesPassed = 0;
                     }
                 }
