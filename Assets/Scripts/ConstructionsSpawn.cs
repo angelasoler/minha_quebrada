@@ -22,6 +22,9 @@ public class ConstructionsSpawn : MonoBehaviour
     public Grid grid;
     bool filled = false;
 
+    int totalConstructions = 0;
+    int maxConstructions;
+
     AudioManager audioManager;
 
     void Start()
@@ -29,20 +32,48 @@ public class ConstructionsSpawn : MonoBehaviour
         audioManager = AudioManager.Instance;
 
         occupied = new bool[maxGridY][];
-        for (int i = 0; i < maxGridY; i++)
-        {
-            occupied[i] = new bool[maxLineX[0]];
-        }
-
         constructionGrid = new ConstructionType[maxGridY][];
         for (int i = 0; i < maxGridY; i++)
         {
+            occupied[i] = new bool[maxLineX[0]];
             constructionGrid[i] = new ConstructionType[maxLineX[0]];
+            maxConstructions += maxLineX[i];
         }
 
         StartCoroutine(spawnCasaTimer());
     }
 
+    public void spawnarHospital()
+    {
+        /*int[] maxLineXHosp = new int[maxLineX.Length];
+        for(int i = 0; i < maxLineX.Length; i++)
+        {
+            maxLineXHosp[i]--;
+        }*/
+
+        int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
+
+        if (coordenadas[0] > -1)
+        {
+            // Logica para criar novo asset de casa no mapa
+            grid.spawnHospitalInGrid(coordenadas);
+            // Toca musica ao spawnar
+            if (audioManager != null)
+            {
+                audioManager.playSound("const_hospital");
+            }
+            // Logica para adicionar no sistema
+            occupied[coordenadas[1]][coordenadas[0]] = true;
+            occupied[coordenadas[1]][coordenadas[0]+1] = true;
+
+            constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
+            constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
+        }
+        else
+        {
+            Debug.Log("Coordenada -1");
+        }
+    }
 
     void spawnarCasa(int[] coordenadas)
 {

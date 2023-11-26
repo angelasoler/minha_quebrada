@@ -10,6 +10,7 @@ public class Grid : MonoBehaviour
     public float multiplier;
 
     [SerializeField] GameObject[] objects;
+    public GameObject[] hospitals;
 
     public Vector3 ConvertCordToVector3(int[] coordinate)
     {
@@ -26,6 +27,13 @@ public class Grid : MonoBehaviour
         int range = UnityEngine.Random.Range(0, objects.Length - 1);
 
         Instantiate(objects[range], ConvertCordToVector3(coordinate), Quaternion.identity);
+    }
+
+    public void spawnHospitalInGrid(int[] coordinate)
+    {
+        Debug.Log("spawn");
+        int index = UnityEngine.Random.Range(0, hospitals.Length - 1);
+        Instantiate(hospitals[index], ConvertCordToVector3(coordinate), Quaternion.identity);
     }
 
     // Start is called before the first frame update

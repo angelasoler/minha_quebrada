@@ -12,29 +12,33 @@ public class AddWorkforce : MonoBehaviour
 
     public SpriteRenderer button;
 
-    public AudioSource audioSource;
-
     private ResourceManager manager;
 
     AudioManager audioManager;
 
+    public int delayToDespawn;
+
+    private WorkforceSpawner workforceSpawner;
+
     private void Start()
     {
+        workforceSpawner = WorkforceSpawner.Instance;
         manager = ResourceManager.Instance;
         audioManager = AudioManager.Instance;
+        StartCoroutine(despawnAutomatic(delayToDespawn));
     }
 
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator despawnAutomatic(int seconds)
     {
-        
-        
+        yield return new WaitForSeconds(seconds);
+        workforceSpawner.DecreaseCount();
+        Destroy(gameObject);
     }
 
     private void OnMouseDown()
     {
         manager.AddCount();
+        workforceSpawner.DecreaseCount();
         audioManager.playSound("const_hospital");
         Destroy(gameObject);
 

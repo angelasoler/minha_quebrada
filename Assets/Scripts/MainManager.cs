@@ -24,8 +24,6 @@ public class MainManager : MonoBehaviour
     {
         currentLifeValue = value;
         decrementBar.setBarValue(currentLifeValue);
-        Debug.Log("Set");
-        Debug.Log(value);
     }
 
     public void increaseLifeValue(float ammount)
@@ -44,7 +42,6 @@ public class MainManager : MonoBehaviour
             currentLifeValue -= ammount;
         }
         decrementBar.setBarValue(currentLifeValue);
-        Debug.Log(ammount);
     }
 
     void Start()
