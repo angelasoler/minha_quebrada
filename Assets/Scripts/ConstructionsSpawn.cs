@@ -43,6 +43,37 @@ public class ConstructionsSpawn : MonoBehaviour
         StartCoroutine(spawnCasaTimer());
     }
 
+    public void spawnarHospital()
+    {
+        /*int[] maxLineXHosp = new int[maxLineX.Length];
+        for(int i = 0; i < maxLineX.Length; i++)
+        {
+            maxLineXHosp[i]--;
+        }*/
+
+        int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
+
+        if (coordenadas[0] > -1)
+        {
+            // Logica para criar novo asset de casa no mapa
+            grid.spawnHospitalInGrid(coordenadas);
+            // Toca musica ao spawnar
+            if (audioManager != null)
+            {
+                audioManager.playSound("const_hospital");
+            }
+            // Logica para adicionar no sistema
+            occupied[coordenadas[1]][coordenadas[0]] = true;
+            occupied[coordenadas[1]][coordenadas[0]+1] = true;
+
+            constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
+            constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
+        }
+        else
+        {
+            Debug.Log("Coordenada -1");
+        }
+    }
 
     void spawnarCasa(int[] coordenadas)
 {
