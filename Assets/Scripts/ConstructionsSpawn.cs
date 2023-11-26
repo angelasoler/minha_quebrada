@@ -47,21 +47,22 @@ public class ConstructionsSpawn : MonoBehaviour
         for (int i = 0; i < maxGridY; i++)
         {
             occupied[i] = new bool[maxLineX[0]];
-            
             constructionGrid[i] = new ConstructionType[maxLineX[0]];
 
             if (i == 0 || i == 1)
             {
-                occupied[i][13] = true;
                 occupied[i][14] = true;
+                occupied[i][13] = true;
                 occupied[i][15] = true;
                 occupied[i][16] = true;
-
+              
                 constructionGrid[i][13] = ConstructionType.Estrada;
                 constructionGrid[i][14] = ConstructionType.Estrada;
                 constructionGrid[i][15] = ConstructionType.Estrada;
                 constructionGrid[i][16] = ConstructionType.Estrada;
             }
+
+
             maxConstructions += maxLineX[i];
         }
 
@@ -76,18 +77,17 @@ public class ConstructionsSpawn : MonoBehaviour
             maxLineXHosp[i]--;
         }*/
 
+        int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
         if (!filled)
         {
-            int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
-
             if (coordenadas[0] > -1 && resourceManager.count >= 5)
             {
 
                 resourceManager.RemoveCount(price);
-                
 
-            // Logica para criar novo asset de casa no mapa
-            grid.spawnHospitalInGrid(coordenadas);
+
+                // Logica para criar novo asset de casa no mapa
+                grid.spawnHospitalInGrid(coordenadas);
                 // Toca musica ao spawnar
                 if (audioManager != null)
                 {
@@ -100,11 +100,12 @@ public class ConstructionsSpawn : MonoBehaviour
                 constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
                 constructionGrid[coordenadas[1]][coordenadas[0] + 1] = ConstructionType.Hospital;
 
-            
-        }
-        else
-        {
-            Debug.Log("Coordenada -1");
+
+            }
+            else
+            {
+                Debug.Log("Coordenada -1");
+            }
         }
     }
 
@@ -123,7 +124,6 @@ public class ConstructionsSpawn : MonoBehaviour
             occupied[coordenadas[1]][coordenadas[0]] = true;
             constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Casa;
         }
-        
 }
 
 public int[] casasPorY()
@@ -174,166 +174,73 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
                         primeiraLinha = i + 1;
                 }
                 else if(cpy[i] == 0 && i < maxY - 1)
->>>>>>> modifier
 
-                // Logica para criar novo asset de casa no mapa
-                grid.spawnHospitalInGrid(coordenadas);
-                // Toca musica ao spawnar
-                if (audioManager != null)
                 {
-                    {
-                        audioManager.playSound("const_hospital");
+                    if (cpy[i + 1] == 0)
+				    {
+                            ultimaLinha = i + 1;
+
                     }
-                    // Logica para adicionar no sistema
-                    occupied[coordenadas[1]][coordenadas[0]] = true;
-                    occupied[coordenadas[1]][coordenadas[0] + 1] = true;
-
-                    constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
-                    constructionGrid[coordenadas[1]][coordenadas[0] + 1] = ConstructionType.Hospital;
-
-                    totalConstructions += 2;
-                }
-                else
-                {
-                    Debug.Log("Coordenada -1");
                 }
             }
-        }
-    }
-        void spawnarCasa(int[] coordenadas)
-        {
-            if (coordenadas[0] > -1 && !filled)
-            {
-                // Logica para criar novo asset de casa no mapa
-                grid.spawnHouseInGrid(coordenadas);
-                // Toca musica ao spawnar
-                if (audioManager != null)
-                {
-                    audioManager.playSound("const_casa");
-                }
-                // Logica para adicionar no sistema
-                occupied[coordenadas[1]][coordenadas[0]] = true;
-                constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Casa;
 
-                totalConstructions += 1;
+            if (ultimaLinha >= maxX.Length)
+            {
+                ultimaLinha = maxX.Length-1;
+            }
+
+            int rand = UnityEngine.Random.Range(1, 101);
+
+            if (rand < 51)
+            {
+                    toReturn[1] = primeiraLinha;
+
+            }
+            else if(rand >= 51 && rand <= 75)
+
+            {
+                    toReturn[1] = primeiraLinha + 1;
+
+            }
+            else if(rand >= 76 && rand <= 95)
+
+            {
+                    toReturn[1] = UnityEngine.Random.Range(primeiraLinha, ultimaLinha);
+
+            }
+            else if(rand >= 96 && rand <= 99)
+
+            {
+                    toReturn[1] = ultimaLinha - 1;
+
+            }
+
+            else
+            {
+                    toReturn[1] = ultimaLinha;
+
             }
         }
-
-    public int[] casasPorY() 
-    {
-        int[] toReturn = new int[maxGridY];
-        for (int y = 0; y < maxGridY; y++)
+        if (toReturn[1] >= maxGridY) 
         {
-            for (int x = 0; x < occupied[y].Length; x++)
+            toReturn[0] = -1;
+            toReturn[1] = -1;
+            filled = true;
+        }
+        else { 
+            toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
+
+            while (isCasaOcupada(toReturn)) 
             {
-                    if (occupied[y][x]) { toReturn[y]++; };
+                    if (cpy[toReturn[1]] >= maxX[toReturn[1]])
+                    {
+                        break;
+                    }
+                    toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
             }
         }
         return toReturn;
-    }
-
-    bool isCasaOcupada(int[] coordinates)
-    {
-            return occupied[coordinates[1]][coordinates[0]];
-    }
-
-    int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
-    {
-            int[] toReturn = new int[2]; // x,y
-
-            int maxY = cpy.Length;
-        // Pega uma array de numeros indicando a quantidade de casas por linha e calcula em qual coordenada X e Y a casa deve surgir
-        // Ver qual a ultima linhas que tem casas. As linhas aonde podem spawnar são até 2 acima desta. Ignore linhas que tenham mais casas que o maximo
-        // 1 a 50, adiciona uma casa na linha mais baixa. 51 a 75 adiciona na linha acima dessa. 76 à 95 adiciona em alguma linha aleatória que ja tenha casa. 96 a 99 adiciona na linha acima da ultima que tem casas. 
-        // 100 adiciona na segunda acima da ultima
-        // No primeiro turno, sempre vai ser na primeira linha (y=0)
-
-        // Ultima linha em que pode aparecer casas
-
-            if (cpy[0] == 0)
-            {
-                    toReturn[1] = 0;
-
-            }
-            else
-            {
-                int primeiraLinha = 0;
-                int ultimaLinha = 1;
-                for (int i = 0; i < maxY; i++)
-                {
-                    // Maximo de casas nessa linha
-                    if (cpy[i] >= maxX[i])
-                    { 
-                            primeiraLinha = i + 1;
-                    }
-                    else if(cpy[i] == 0 && i < maxY - 1)
-
-                    {
-                        if (cpy[i + 1] == 0)
-				        {
-                                ultimaLinha = i + 1;
-
-                        }
-                    }
-                }
-
-                if (ultimaLinha >= maxX.Length)
-                {
-                    ultimaLinha = maxX.Length-1;
-                }
-
-                int rand = UnityEngine.Random.Range(1, 101);
-
-                if (rand < 51)
-                {
-                        toReturn[1] = primeiraLinha;
-
-                }
-                else if(rand >= 51 && rand <= 75)
-
-                {
-                        toReturn[1] = primeiraLinha + 1;
-
-                }
-                else if(rand >= 76 && rand <= 95)
-
-                {
-                        toReturn[1] = UnityEngine.Random.Range(primeiraLinha, ultimaLinha);
-
-                }
-                else if(rand >= 96 && rand <= 99)
-
-                {
-                        toReturn[1] = ultimaLinha - 1;
-
-                }
-
-                else
-                {
-                        toReturn[1] = ultimaLinha;
-
-                }
-            }
-            if (toReturn[1] >= maxGridY) 
-            {
-                toReturn[0] = -1;
-                toReturn[1] = -1;
-                filled = true;
-            }
-            else { 
-                toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
-
-                while (isCasaOcupada(toReturn)) 
-                {
-                        if (cpy[toReturn[1]] >= maxX[toReturn[1]])
-                        {
-                            break;
-                        }
-                        toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
-                }
-            }
-            return toReturn;
-    }
+}
 
     // Update is called once per frame
 
@@ -350,15 +257,11 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
 
     void Update()
     {
-<<<<<<< HEAD
         if (totalConstructions >= maxConstructions)
-        {
             filled = true;
-=======
         if (Input.GetKeyDown(KeyCode.H)){
             spawnarHospital();
             mainManager.increaseLifeValue(increaseAmount);
->>>>>>> modifier
         }
         
     }
