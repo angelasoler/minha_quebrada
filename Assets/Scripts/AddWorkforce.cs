@@ -20,6 +20,8 @@ public class AddWorkforce : MonoBehaviour
 
     private WorkforceSpawner workforceSpawner;
 
+    public Animator animator;
+
     private void Start()
     {
         workforceSpawner = WorkforceSpawner.Instance;
@@ -40,8 +42,13 @@ public class AddWorkforce : MonoBehaviour
         manager.AddCount();
         workforceSpawner.DecreaseCount();
         audioManager.playSound("const_hospital");
-        Destroy(gameObject);
+        animator.SetTrigger("Clicked");
 
+    }
+
+    public void destroy()
+    {
+        Destroy(gameObject);
     }
 
 }
