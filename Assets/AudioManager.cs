@@ -27,6 +27,7 @@ public class AudioManager : MonoBehaviour
         foreach (Music music in audios) {
             if (music.name == name)
             {
+                audioSource.pitch = UnityEngine.Random.Range(0.9f,1.1f);
                 audioSource.PlayOneShot(music.clip);
             }
         }
