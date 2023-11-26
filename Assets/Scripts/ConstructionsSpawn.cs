@@ -22,6 +22,9 @@ public class ConstructionsSpawn : MonoBehaviour
     public Grid grid;
     bool filled = false;
 
+    int totalConstructions = 0;
+    int maxConstructions;
+
     AudioManager audioManager;
 
     void Start()
@@ -29,15 +32,12 @@ public class ConstructionsSpawn : MonoBehaviour
         audioManager = AudioManager.Instance;
 
         occupied = new bool[maxGridY][];
-        for (int i = 0; i < maxGridY; i++)
-        {
-            occupied[i] = new bool[maxLineX[0]];
-        }
-
         constructionGrid = new ConstructionType[maxGridY][];
         for (int i = 0; i < maxGridY; i++)
         {
+            occupied[i] = new bool[maxLineX[0]];
             constructionGrid[i] = new ConstructionType[maxLineX[0]];
+            maxConstructions += maxLineX[i];
         }
 
         StartCoroutine(spawnCasaTimer());
