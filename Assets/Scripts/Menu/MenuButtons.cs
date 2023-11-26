@@ -14,6 +14,8 @@ public class MenuButtons : MonoBehaviour
 
     public AudioSource audioSource;
 
+    public AudioClip clip;
+
     private void Start()
     {
     }
@@ -30,17 +32,12 @@ public class MenuButtons : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("Teste");
+        SceneManager.LoadScene("Main");
     }
     private void OnMouseDown()
     {
-        audioSource.Play();
-        Destroy(button);
-
-        if (button == null)
-        {
-            Destroy(audioSource);
-        }
+        audioSource.PlayOneShot(clip);
+        
     }
 
 }

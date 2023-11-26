@@ -104,8 +104,9 @@ public class ConstructionsSpawn : MonoBehaviour
             }
             else
             {
-                Debug.Log("Coordenada -1");
+                audioManager.playSound("falha");
             }
+            
         }
     }
 
@@ -225,6 +226,7 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
         {
             toReturn[0] = -1;
             toReturn[1] = -1;
+            GameOver.Instance.GoodEnding();
             filled = true;
         }
         else { 
@@ -257,8 +259,12 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
 
     void Update()
     {
-        if (totalConstructions >= maxConstructions)
+        if (totalConstructions >= maxConstructions) { 
+            GameOver.Instance.GoodEnding();
             filled = true;
+        }
+        if (mainManager.currentLifeValue < 2)
+            GameOver.Instance.BadEnding();
         if (Input.GetKeyDown(KeyCode.H)){
             spawnarHospital();
             
