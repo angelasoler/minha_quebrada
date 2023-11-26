@@ -30,7 +30,7 @@ public class MenuButtons : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("spawn_house");
+        SceneManager.LoadScene("Teste");
     }
     private void OnMouseDown()
     {
