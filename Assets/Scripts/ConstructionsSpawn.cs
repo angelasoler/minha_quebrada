@@ -7,11 +7,17 @@ using UnityEngine;
 public class ConstructionsSpawn : MonoBehaviour
 {
     // Start is called before the first frame update
+    public enum ConstructionType
+    {
+        Casa,
+        Hospital
+    }
 
     public int maxGridY;
     public int[] minLineX;
     public int[] maxLineX;
     public bool[][] occupied;
+    public ConstructionType[][] constructionGrid;
     public int minTimeInterval, maxTimeInterval;
     public Grid grid;
     bool filled = false;
@@ -26,6 +32,12 @@ public class ConstructionsSpawn : MonoBehaviour
         for (int i = 0; i < maxGridY; i++)
         {
             occupied[i] = new bool[maxLineX[0]];
+        }
+
+        constructionGrid = new ConstructionType[maxGridY][];
+        for (int i = 0; i < maxGridY; i++)
+        {
+            constructionGrid[i] = new ConstructionType[maxLineX[0]];
         }
 
         StartCoroutine(spawnCasaTimer());
@@ -45,6 +57,7 @@ public class ConstructionsSpawn : MonoBehaviour
             }
             // Logica para adicionar no sistema
             occupied[coordenadas[1]][coordenadas[0]] = true;
+            constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Casa;
         }
         
 }

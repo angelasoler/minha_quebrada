@@ -738,9 +738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4f300c66f6f534ebee82c38b7c58be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decrement: 0.5
-  current: 0
-  initialValue: 50
+  slider: {fileID: 677035257}
 --- !u!114 &677035257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -973,9 +971,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxValue: 100
   minValue: 0
-  current: 50
-  slider: {fileID: 677035257}
+  currentLifeValue: 0
+  initialValue: 50
   decrementBar: {fileID: 677035256}
+  spawn: {fileID: 1322139017}
 --- !u!114 &1322139017
 MonoBehaviour:
   m_ObjectHideFlags: 0
