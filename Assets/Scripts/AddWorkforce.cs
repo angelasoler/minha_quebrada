@@ -16,9 +16,12 @@ public class AddWorkforce : MonoBehaviour
 
     private ResourceManager manager;
 
+    AudioManager audioManager;
+
     private void Start()
     {
         manager = ResourceManager.Instance;
+        audioManager = AudioManager.Instance;
     }
 
 
@@ -32,13 +35,9 @@ public class AddWorkforce : MonoBehaviour
     private void OnMouseDown()
     {
         manager.AddCount();
-        audioSource.Play();
+        audioManager.playSound("const_hospital");
         Destroy(gameObject);
 
-        if (button == null)
-        {
-            Destroy(audioSource);
-        }
     }
 
 }
