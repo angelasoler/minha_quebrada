@@ -5,7 +5,7 @@ using UnityEngine;
 public class WorkforceSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject prefab;
+    public GameObject prefab;
 
     public float interval = 2;
 
@@ -16,9 +16,7 @@ public class WorkforceSpawner : MonoBehaviour
 
     public Grid grid;
 
-    private bool[][] arrayCasas;
-
-    private int element;
+    private bool[][] arrayCasas; 
 
     public int timer;
 
@@ -58,7 +56,6 @@ public class WorkforceSpawner : MonoBehaviour
                         cords[1] = y+1;
                         Instantiate(prefab, grid.ConvertCordToVector3(cords), Quaternion.identity);
                         timesPassed = 0;
-                        didReceive = true;
                     }
                 }
             }
