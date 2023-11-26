@@ -9,33 +9,29 @@ public class AddWorkforce : MonoBehaviour
 {
 
     public TMP_Text text;
-    private int count = 0;
 
     public SpriteRenderer button;
 
     public AudioSource audioSource;
 
-    private Vector3 position;
+    private ResourceManager manager;
 
     private void Start()
     {
-        text = GameObject.FindGameObjectWithTag("WorkforceText").GetComponent<TMP_Text>();
+        manager = ResourceManager.Instance;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (button != null) {
-            text.SetText(count.ToString());
-            position = transform.position + new Vector3(100f, 100f, 0f);
-        }
+        
         
     }
 
     private void OnMouseDown()
     {
-        count += 1;
+        manager.AddCount();
         audioSource.Play();
         Destroy(gameObject);
 
