@@ -23,7 +23,6 @@ public class ConstructionsSpawn : MonoBehaviour
             occupied[i] = new bool[maxLineX[0]];
         }
 
-
         StartCoroutine(spawnCasaTimer());
     }
 

@@ -37,7 +37,7 @@ public class AddWorkforce : MonoBehaviour
     {
         count += 1;
         audioSource.Play();
-        Destroy(button);
+        Destroy(gameObject);
 
         if (button == null)
         {
