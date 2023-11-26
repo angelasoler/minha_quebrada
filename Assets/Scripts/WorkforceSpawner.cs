@@ -59,7 +59,9 @@ public class WorkforceSpawner : MonoBehaviour
             {
                 for (int x = 0; x < arrayCasas[y].Length; x++)
                 {
-                    if (arrayCasas[y][x] && Random.Range(0,2) == 1 && count < limit)
+                    if (arrayCasas[y][x] 
+                        && (constructionsSpawn.constructionGrid[y][x] != ConstructionsSpawn.ConstructionType.Estrada)
+                        && Random.Range(0,2) == 1 && count < limit)
                     {
                         count++;
                         int[] cords = new int[2];

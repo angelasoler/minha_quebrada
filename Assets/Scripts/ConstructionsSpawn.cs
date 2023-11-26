@@ -10,7 +10,8 @@ public class ConstructionsSpawn : MonoBehaviour
     public enum ConstructionType
     {
         Casa,
-        Hospital
+        Hospital,
+        Estrada
     }
 
     public int maxGridY;
@@ -41,7 +42,21 @@ public class ConstructionsSpawn : MonoBehaviour
         for (int i = 0; i < maxGridY; i++)
         {
             occupied[i] = new bool[maxLineX[0]];
+            
             constructionGrid[i] = new ConstructionType[maxLineX[0]];
+
+            if (i == 0 || i == 1)
+            {
+                occupied[i][13] = true;
+                occupied[i][14] = true;
+                occupied[i][15] = true;
+                occupied[i][16] = true;
+
+                constructionGrid[i][13] = ConstructionType.Estrada;
+                constructionGrid[i][14] = ConstructionType.Estrada;
+                constructionGrid[i][15] = ConstructionType.Estrada;
+                constructionGrid[i][16] = ConstructionType.Estrada;
+            }
             maxConstructions += maxLineX[i];
         }
 
