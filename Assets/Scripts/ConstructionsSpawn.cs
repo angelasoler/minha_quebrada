@@ -15,8 +15,12 @@ public class ConstructionsSpawn : MonoBehaviour
     public Grid grid;
     bool filled = false;
 
+    AudioManager audioManager;
+
     void Start()
     {
+        audioManager = AudioManager.Instance;
+
         occupied = new bool[maxGridY][];
         for (int i = 0; i < maxGridY; i++)
         {
@@ -33,6 +37,8 @@ public class ConstructionsSpawn : MonoBehaviour
         {
             // Logica para criar novo asset de casa no mapa
             grid.spawnHouseInGrid(coordenadas);
+            // Toca musica ao spawnar
+            audioManager.playSound("const_casa");
             // Logica para adicionar no sistema
             occupied[coordenadas[1]][coordenadas[0]] = true;
         }
