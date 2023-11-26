@@ -975,7 +975,7 @@ MonoBehaviour:
   grid: {fileID: 484398340}
   timer: 10
   count: 0
-  limit: 2
+  limit: 10
 --- !u!4 &1123602703
 Transform:
   m_ObjectHideFlags: 0
@@ -1258,6 +1258,7 @@ MonoBehaviour:
   minTimeInterval: 1
   maxTimeInterval: 4
   grid: {fileID: 484398340}
+  price: 5
 --- !u!114 &1183241287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1459,7 +1460,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Compar Hospital (100)
+  m_text: Compar Hospital (5)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

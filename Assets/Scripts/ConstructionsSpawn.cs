@@ -27,9 +27,14 @@ public class ConstructionsSpawn : MonoBehaviour
 
     AudioManager audioManager;
 
+    private ResourceManager resourceManager;
+
+    public int price;
+
     void Start()
     {
         audioManager = AudioManager.Instance;
+        resourceManager = ResourceManager.Instance;
 
         occupied = new bool[maxGridY][];
         constructionGrid = new ConstructionType[maxGridY][];
@@ -54,18 +59,22 @@ public class ConstructionsSpawn : MonoBehaviour
         if (!filled) {
             int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
 
-            if (coordenadas[0] > -1)
+            if (coordenadas[0] > -1 && resourceManager.count >= 5)
             {
+
+                resourceManager.RemoveCount(price);
+
                 // Logica para criar novo asset de casa no mapa
                 grid.spawnHospitalInGrid(coordenadas);
                 // Toca musica ao spawnar
                 if (audioManager != null)
                 {
-                    audioManager.playSound("const_hospital");
-                }
-                // Logica para adicionar no sistema
-                occupied[coordenadas[1]][coordenadas[0]] = true;
-                occupied[coordenadas[1]][coordenadas[0]+1] = true;
+                    {
+                audioManager.playSound("const_hospital");
+            }
+            // Logica para adicionar no sistema
+            occupied[coordenadas[1]][coordenadas[0]] = true;
+            occupied[coordenadas[1]][coordenadas[0]+1] = true;
 
                 constructionGrid[coordenadas[1]][coordenadas[0]] = ConstructionType.Hospital;
                 constructionGrid[coordenadas[1]][coordenadas[0]+1] = ConstructionType.Hospital;
