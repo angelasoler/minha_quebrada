@@ -9,6 +9,7 @@ public class ConstructionsSpawn : MonoBehaviour
     // Start is called before the first frame update
 
     public int maxGridY;
+    public int[] minLineX;
     public int[] maxLineX;
     public bool[][] occupied;
     public int minTimeInterval, maxTimeInterval;
@@ -38,7 +39,10 @@ public class ConstructionsSpawn : MonoBehaviour
             // Logica para criar novo asset de casa no mapa
             grid.spawnHouseInGrid(coordenadas);
             // Toca musica ao spawnar
-            audioManager.playSound("const_casa");
+            if (audioManager != null)
+            {
+                audioManager.playSound("const_casa");
+            }
             // Logica para adicionar no sistema
             occupied[coordenadas[1]][coordenadas[0]] = true;
         }
@@ -63,7 +67,7 @@ bool isCasaOcupada(int[] coordinates)
         return occupied[coordinates[1]][coordinates[0]];
 }
 
-int[] calcularCoordenadas(int[] maxX, int[] cpy)
+int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
 {
         int[] toReturn = new int[2]; // x,y
 
@@ -147,7 +151,7 @@ int[] calcularCoordenadas(int[] maxX, int[] cpy)
             filled = true;
         }
         else { 
-            toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]);
+            toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
 
             while (isCasaOcupada(toReturn)) 
             {
@@ -155,7 +159,7 @@ int[] calcularCoordenadas(int[] maxX, int[] cpy)
                     {
                         break;
                     }
-                    toReturn[0] = UnityEngine.Random.Range(0, maxX[toReturn[1]]);
+                    toReturn[0] = UnityEngine.Random.Range(minX[toReturn[1]], minX[toReturn[1]]+maxX[toReturn[1]]);
             }
         }
         return toReturn;
@@ -167,7 +171,7 @@ int[] calcularCoordenadas(int[] maxX, int[] cpy)
     {
         while (!filled)
         {
-            int[] coordenadas = calcularCoordenadas(maxLineX, casasPorY());
+            int[] coordenadas = calcularCoordenadas(minLineX, maxLineX, casasPorY());
             spawnarCasa(coordenadas);
             yield return new WaitForSeconds(UnityEngine.Random.Range(minTimeInterval, maxTimeInterval));
         }
