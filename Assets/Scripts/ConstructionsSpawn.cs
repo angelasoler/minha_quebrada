@@ -40,7 +40,7 @@ public class ConstructionsSpawn : MonoBehaviour
         
 }
 
-int[] casasPorY()
+public int[] casasPorY()
 {
     int[] toReturn = new int[maxGridY];
     for (int y = 0; y < maxGridY; y++)

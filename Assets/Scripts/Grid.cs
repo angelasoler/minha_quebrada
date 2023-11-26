@@ -1,38 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public Object grid;
+    public UnityEngine.Object grid;
     public float multiplier;
 
     [SerializeField] GameObject[] objects;
 
-    public void spawnHouseInGrid(int[] coordinate)
+    public Vector3 ConvertCordToVector3(int[] coordinate)
     {
-        int range = Random.Range(0, objects.Length - 1);
-
         float convertedX = coordinate[0] * multiplier;
         float convertedY = coordinate[1] * multiplier;
 
-        Instantiate(objects[range], new Vector3(convertedX,convertedY), Quaternion.identity);
+        return new Vector3 (convertedX, convertedY);
+    }
+
+    public void spawnHouseInGrid(int[] coordinate)
+
+    {
+        //Pega um asset aleatorio de uma pool de assets
+        int range = UnityEngine.Random.Range(0, objects.Length - 1);
+
+        Instantiate(objects[range], ConvertCordToVector3(coordinate), Quaternion.identity);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        int[] cords = new int[2];
-        cords[0] = 2;
-        cords[1] = 2;
-        spawnHouseInGrid(cords);
-        cords[0] = 1;
-        cords[1] = 2;
-        spawnHouseInGrid(cords);
 
-        cords[0] = 0;
-        cords[1] = 0;
-        spawnHouseInGrid(cords);
     }
 
     // Update is called once per frame
