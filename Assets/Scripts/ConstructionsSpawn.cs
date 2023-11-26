@@ -84,7 +84,7 @@ public class ConstructionsSpawn : MonoBehaviour
             {
 
                 resourceManager.RemoveCount(price);
-
+                mainManager.increaseLifeValue(increaseAmount);
 
                 // Logica para criar novo asset de casa no mapa
                 grid.spawnHospitalInGrid(coordenadas);
@@ -261,7 +261,7 @@ int[] calcularCoordenadas(int[] minX, int[] maxX, int[] cpy)
             filled = true;
         if (Input.GetKeyDown(KeyCode.H)){
             spawnarHospital();
-            mainManager.increaseLifeValue(increaseAmount);
+            
         }
         
     }

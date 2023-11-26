@@ -451,6 +451,9 @@ MonoBehaviour:
   - {fileID: 2538875951052734207, guid: f4d58e98070597b498e5f2396edb138b, type: 3}
   - {fileID: 2665483191434191060, guid: ee3a4cbf639a74a4db65ea5d31db8ee7, type: 3}
   - {fileID: 1077832799740188815, guid: edd106a54fa34ff40b148e58c5ff24f7, type: 3}
+  - {fileID: 31084801466852135, guid: 8ec276b9c227abc489ffa530b4f3a73a, type: 3}
+  - {fileID: 31084801466852135, guid: 42f2565b87e871f4186a354d77ca87fc, type: 3}
+  - {fileID: 31084801466852135, guid: 471b359547e747f45abb8943e3602864, type: 3}
 --- !u!4 &484398341
 Transform:
   m_ObjectHideFlags: 0
@@ -851,11 +854,11 @@ MonoBehaviour:
   maxGridY: 10
   minLineX: 00000000000000000000000004000000050000000600000007000000090000000b0000000d000000
   maxLineX: 1f0000001f0000001f000000170000001500000013000000110000000d0000000900000005000000
-  minTimeInterval: 2
-  maxTimeInterval: 6
+  minTimeInterval: 1
+  maxTimeInterval: 2
   grid: {fileID: 484398340}
   price: 5
-  increaseAmount: 0
+  increaseAmount: 5
 --- !u!114 &1183241287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +901,7 @@ MonoBehaviour:
   initialValue: 50
   decrementBar: {fileID: 1889810639}
   spawn: {fileID: 1183241286}
-  decreaseAmount: 0
+  decreaseAmount: 0.5
 --- !u!4 &1183241289
 Transform:
   m_ObjectHideFlags: 0
