@@ -657,7 +657,10 @@ MonoBehaviour:
   - {fileID: 3792660355866702856, guid: d8d0d2b5739d9a84484ee9b99c4c5292, type: 3}
   - {fileID: 3792660355866702856, guid: e8197d378dcc2c743a8cbf1582e2880e, type: 3}
   - {fileID: 3792660355866702856, guid: 95db8b4fa355a5d4099fd01233ee7de7, type: 3}
-  hospitalPrefab: {fileID: 2538875951052734207, guid: f4d58e98070597b498e5f2396edb138b, type: 3}
+  hospitals:
+  - {fileID: 2538875951052734207, guid: f4d58e98070597b498e5f2396edb138b, type: 3}
+  - {fileID: 2665483191434191060, guid: ee3a4cbf639a74a4db65ea5d31db8ee7, type: 3}
+  - {fileID: 1077832799740188815, guid: edd106a54fa34ff40b148e58c5ff24f7, type: 3}
 --- !u!4 &484398341
 Transform:
   m_ObjectHideFlags: 0
@@ -971,6 +974,8 @@ MonoBehaviour:
   constructionsSpawn: {fileID: 1183241286}
   grid: {fileID: 484398340}
   timer: 10
+  count: 0
+  limit: 2
 --- !u!4 &1123602703
 Transform:
   m_ObjectHideFlags: 0

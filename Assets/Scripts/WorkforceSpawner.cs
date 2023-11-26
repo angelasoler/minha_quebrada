@@ -20,7 +20,17 @@ public class WorkforceSpawner : MonoBehaviour
 
     public int timer;
 
+    public int count;
 
+    public int limit;
+
+    public static WorkforceSpawner Instance;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -43,14 +53,15 @@ public class WorkforceSpawner : MonoBehaviour
     {
         timesPassed++;
         if (
-            (Random.Range(1, 100) > 75 || timesPassed == timer))
+            (Random.Range(1, 100) > 80 || timesPassed == timer))
 
        for (int y = 0; y < arrayCasas.Length; y++)
             {
                 for (int x = 0; x < arrayCasas[y].Length; x++)
                 {
-                    if (arrayCasas[y][x] && Random.Range(0,2) == 1)
+                    if (arrayCasas[y][x] && Random.Range(0,2) == 1 && count < limit)
                     {
+                        count++;
                         int[] cords = new int[2];
                         cords[0] = x;
                         cords[1] = y+1;
@@ -63,5 +74,10 @@ public class WorkforceSpawner : MonoBehaviour
 
 
         }
+
+    public void DecreaseCount()
+    {
+        count -= 1;
+    }
     }
 

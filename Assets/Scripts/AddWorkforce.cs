@@ -18,8 +18,11 @@ public class AddWorkforce : MonoBehaviour
 
     public int delayToDespawn;
 
+    private WorkforceSpawner workforceSpawner;
+
     private void Start()
     {
+        workforceSpawner = WorkforceSpawner.Instance;
         manager = ResourceManager.Instance;
         audioManager = AudioManager.Instance;
         StartCoroutine(despawnAutomatic(delayToDespawn));
@@ -28,12 +31,14 @@ public class AddWorkforce : MonoBehaviour
     IEnumerator despawnAutomatic(int seconds)
     {
         yield return new WaitForSeconds(seconds);
+        workforceSpawner.DecreaseCount();
         Destroy(gameObject);
     }
 
     private void OnMouseDown()
     {
         manager.AddCount();
+        workforceSpawner.DecreaseCount();
         audioManager.playSound("const_hospital");
         Destroy(gameObject);
 
