@@ -26,6 +26,10 @@ public class WorkforceSpawner : MonoBehaviour
 
     public static WorkforceSpawner Instance;
 
+    public int minXValue;
+
+    public int maxXValue;
+
 
     private void Awake()
     {
@@ -51,9 +55,12 @@ public class WorkforceSpawner : MonoBehaviour
 
     void SpawnWorkforce()
     {
+
         timesPassed++;
         if (
-            (Random.Range(1, 100) > 80 || timesPassed == timer))
+            Random.Range(1, 100) > 80 || timesPassed == timer)
+
+            
 
        for (int y = 0; y < arrayCasas.Length; y++)
             {
